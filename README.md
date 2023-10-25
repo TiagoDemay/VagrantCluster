@@ -4,7 +4,11 @@ Roteiro - Criação do Cluster
 
  
 
-PARTE 1 - INSTALAÇÃO DOS SOFTWARES NECESSÁRIOS 
+PARTE 1 - INSTALAÇÃO DOS SOFTWARES NECESSÁRIOS
+
+
+Você deverá montar a sua Maquina Host principal, SSD, M2, memorias e Sistema Operacional Ubuntu Desktop 22.04 LTS.
+
 
 Instalar os seguintes softwares: 
 
