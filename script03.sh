@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "account required pam_slurm.so" >> $CHROOT/etc/pam.d/sshd
 source /vagrant/setenv.c 
 yum -y install ohpc-nagios 
 yum -y --installroot=$CHROOT install nagios-plugins-all-ohpc nrpe-ohpc 
@@ -10,6 +11,9 @@ echo "nrpe : ${sms_ip} : ALLOW" >> $CHROOT/etc/hosts.allow
 echo "nrpe : ALL : DENY" >> $CHROOT/etc/hosts.allow 
 chroot $CHROOT /usr/sbin/useradd -c "NRPE user for the NRPE service" -d /var/run/nrpe -r -g nrpe -s /sbin/nologin nrpe 
 chroot $CHROOT /usr/sbin/groupadd -r nrpe 
+
+mv /etc/nagios/conf.d/services.cfg.example /etc/nagios/conf.d/services.cfg
+
 mv /etc/nagios/conf.d/hosts.cfg.example /etc/nagios/conf.d/hosts.cfg 
 
 num_computes=$(echo $num_computes | tr -d '\r') 
@@ -87,8 +91,9 @@ echo "/etc/passwd -> /etc/passwd" > /install/custom/netboot/compute.synclist
 echo "/etc/group -> /etc/group" >> /install/custom/netboot/compute.synclist 
 echo "/etc/shadow -> /etc/shadow" >> /install/custom/netboot/compute.synclist 
 echo "/etc/slurm/slurm.conf -> /etc/slurm/slurm.conf " >> /install/custom/netboot/compute.synclist 
-echo "/etc/munge/munge.key -> /etc/munge/munge.key " >> /install/custom/netboot/compute.synclist 
-
+echo "/etc/munge/munge.key -> /etc/munge/munge.key " >> /install/custom/netboot/compute.synclist
+ 
+updatenode compute -F
  
 packimage centos7.7-x86_64-netboot-compute  
 
