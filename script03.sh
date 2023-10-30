@@ -1,5 +1,4 @@
 #!/bin/bash
-
 echo "account required pam_slurm.so" >> $CHROOT/etc/pam.d/sshd
 source /vagrant/setenv.c 
 yum -y install ohpc-nagios 

@@ -1,5 +1,14 @@
 #!/bin/bash
 
+
+
+systemctl disable firewalld
+systemctl stop firewalld
+
+# Configuração da interface de rede
+echo ${sms_ip} ${sms_name} ${sms_name}.hpcnet >> /etc/hosts
+perl -pi -e "s/SELINUX=\S+/SELINUX=disabled/" /etc/selinux/config
+
 # Instalação do OpenHPC
 yum install -y http://build.openhpc.community/OpenHPC:/1.3/CentOS_7/x86_64/ohpc-release-1.3-1.el7.x86_64.rpm
 

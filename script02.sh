@@ -1,8 +1,9 @@
 #!/bin/bash
 
 source /vagrant/setenv.c
-# Configuração da interface de rede
+
 ifconfig ${sms_eth_internal} ${sms_ip} netmask ${internal_netmask} up 
+
 
 # Configuração do xCAT
 chdef -t site dhcpinterfaces="xcatmn|${sms_eth_internal}"  
