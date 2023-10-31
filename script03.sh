@@ -1,6 +1,16 @@
+
 #!/bin/bash
+
+# Setando variaveis de ambiente
+source /vagrant/setenv.c
+export sms_name=sms-host
+# Definindo o diretório CHROOT
+export CHROOT=/install/netboot/centos7.7/x86_64/compute/rootimg/ 
+
+
 echo "account required pam_slurm.so" >> $CHROOT/etc/pam.d/sshd
-source /vagrant/setenv.c 
+
+
 yum -y install ohpc-nagios 
 yum -y --installroot=$CHROOT install nagios-plugins-all-ohpc nrpe-ohpc 
 chroot $CHROOT systemctl enable nrpe 
@@ -11,7 +21,7 @@ echo "nrpe : ALL : DENY" >> $CHROOT/etc/hosts.allow
 chroot $CHROOT /usr/sbin/useradd -c "NRPE user for the NRPE service" -d /var/run/nrpe -r -g nrpe -s /sbin/nologin nrpe 
 chroot $CHROOT /usr/sbin/groupadd -r nrpe 
 
-export sms_name=sms-host
+
 
 mv /etc/nagios/conf.d/services.cfg.example /etc/nagios/conf.d/services.cfg
 
@@ -53,7 +63,7 @@ perl -pi -e "s/<sms>/${sms_name}/" /etc/ganglia/gmond.conf
 
 cp /etc/ganglia/gmond.conf $CHROOT/etc/ganglia/gmond.conf 
 
-echo "gridname MySite" >> /etc/ganglia/gmetad.conf 
+echo "gridname InsperClusterSite" >> /etc/ganglia/gmetad.conf 
 
 systemctl enable gmond 
 
@@ -98,6 +108,8 @@ echo "/etc/munge/munge.key -> /etc/munge/munge.key " >> /install/custom/netboot/
  
 updatenode compute -F
  
+echo "10.10.10.10 sms-host" >> $CHROOT/etc/hosts
+
 packimage centos7.7-x86_64-netboot-compute  
 
 mkdef -t node compute00 groups=compute,all ip=${c_ip[0]} mac=${c_mac[0]} netboot=xnba arch=x86_64 bmc=${c_bmc[0]} bmcusername=${bmc_username} bmcpassword=${bmc_password} mgt=ipmi serialport=0 serialspeed=115200 
@@ -120,6 +132,7 @@ makedhcp -n
 makedns -n 
 
 nodeset compute osimage=centos7.7-x86_64-netboot-compute 
+
 
 echo "Finalizamos boa parte das configurações das máquinas e agora voltamos a executar os comandos na máquina física."  
 

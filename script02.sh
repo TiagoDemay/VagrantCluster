@@ -1,6 +1,12 @@
 #!/bin/bash
 
+
+# Setando variaveis de ambiente
 source /vagrant/setenv.c
+export sms_name=sms-host
+# Definindo o diretório CHROOT
+export CHROOT=/install/netboot/centos7.7/x86_64/compute/rootimg/  
+
 
 ifconfig ${sms_eth_internal} ${sms_ip} netmask ${internal_netmask} up 
 
@@ -20,8 +26,7 @@ mv CentOS-7-x86_64-DVD-1908.iso $iso_path
 # Configuração do xCAT para usar a ISO
 copycds ${iso_path}/CentOS-7-x86_64-DVD-1908.iso 
 
-# Definindo o diretório CHROOT
-export CHROOT=/install/netboot/centos7.7/x86_64/compute/rootimg/  
+
 
 # Gerando imagem para netboot
 genimage centos7.7-x86_64-netboot-compute 

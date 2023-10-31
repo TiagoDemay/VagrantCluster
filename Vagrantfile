@@ -70,7 +70,6 @@ Vagrant.configure("2") do |config|
   # config.vm.synced_folder "
 
   config.vm.provision "shell", inline: "source /vagrant/setenv.c"
-  config.vm.provision "shell", inline: "echo ${sms_ip} ${sms_name} ${sms_name}.hpcnet >> /etc/hosts"
   config.vm.provision "shell", inline: "perl -pi -e \"s/SELINUX=\\S+/SELINUX=disabled/\" /etc/selinux/config"
   config.vm.provision "shell", inline: "/vagrant/script01.sh"
   config.vm.provision "shell", inline: "/vagrant/script02.sh"

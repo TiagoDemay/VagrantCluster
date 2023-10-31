@@ -1,6 +1,10 @@
 #!/bin/bash
 
-source /vagrant/setenv.c 
+# Setando variaveis de ambiente
+source /vagrant/setenv.c
+export sms_name=sms-host
+# Definindo o diretório CHROOT
+export CHROOT=/install/netboot/centos7.7/x86_64/compute/rootimg/ 
 
 systemctl disable firewalld
 systemctl stop firewalld
