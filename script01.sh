@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+source /vagrant/setenv.c 
 
 systemctl disable firewalld
 systemctl stop firewalld

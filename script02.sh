@@ -34,6 +34,8 @@ cp /etc/yum.repos.d/OpenHPC.repo $CHROOT/etc/yum.repos.d
 cp /etc/yum.repos.d/epel.repo $CHROOT/etc/yum.repos.d 
 
 # Instalando pacotes no CHROOT
+yum -y --installroot=$CHROOT install telnet
+yum -y --installroot=$CHROOT install net-tools
 yum -y --installroot=$CHROOT install ohpc-base-compute 
 yum -y --installroot=$CHROOT install ohpc-slurm-client  
 yum -y --installroot=$CHROOT install ntp 

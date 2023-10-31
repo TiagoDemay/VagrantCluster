@@ -72,12 +72,10 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: "source /vagrant/setenv.c"
   config.vm.provision "shell", inline: "echo ${sms_ip} ${sms_name} ${sms_name}.hpcnet >> /etc/hosts"
   config.vm.provision "shell", inline: "perl -pi -e \"s/SELINUX=\\S+/SELINUX=disabled/\" /etc/selinux/config"
-  config.vm.provision "shell", inline: "systemctl disable firewalld"
-  config.vm.provision "shell", inline: "systemctl stop firewalld"
   config.vm.provision "shell", inline: "/vagrant/script01.sh"
   config.vm.provision "shell", inline: "/vagrant/script02.sh"
   config.vm.provision "shell", inline: "/vagrant/script03.sh"
-  config.vm.provision "shell", inline: "echo ola >> /etc/hosts"
+  config.vm.provision "shell", inline: "/vagrant/script04.sh"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.

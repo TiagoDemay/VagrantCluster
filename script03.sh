@@ -11,6 +11,8 @@ echo "nrpe : ALL : DENY" >> $CHROOT/etc/hosts.allow
 chroot $CHROOT /usr/sbin/useradd -c "NRPE user for the NRPE service" -d /var/run/nrpe -r -g nrpe -s /sbin/nologin nrpe 
 chroot $CHROOT /usr/sbin/groupadd -r nrpe 
 
+export sms_name=sms-host
+
 mv /etc/nagios/conf.d/services.cfg.example /etc/nagios/conf.d/services.cfg
 
 mv /etc/nagios/conf.d/hosts.cfg.example /etc/nagios/conf.d/hosts.cfg 
@@ -41,7 +43,9 @@ chmod u+s `which ping`
 
 yum -y install ohpc-ganglia 
 
-yum -y --installroot=$CHROOT install ganglia-gmond-ohpc 
+yum -y --installroot=$CHROOT install ganglia-gmond
+
+yum -y --installroot=$CHROOT install ganglia-gmetad
 
 cp /opt/ohpc/pub/examples/ganglia/gmond.conf /etc/ganglia/gmond.conf 
 
