@@ -51,3 +51,9 @@ ClusterShell - usado para executar comandos em paralelo entre nós do cluster - 
 Node Health Check (NHC) - executa uma verificação periódica em cada nó de computação para verificar se o nó está em boas condições de funcionamento. 
 
 Identificação de arquivos para sincronização por xCAT - sincronização de arquivos base do host SMS para os nós de computação gerenciados. 
+
+
+   13  sinfo
+   14  scontrol update nodename=compute00 state=IDLE
+   15  scontrol update nodename=compute01 state=IDLE
+   16  sinfo
