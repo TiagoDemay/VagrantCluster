@@ -34,20 +34,22 @@ Em um terminal (prompt de comando), digite: vagrant up
 
 O comando anterior vai ler os parâmetros que estão no arquivo Vagrantfile, criar a máquina virtual, fazendo download e instalação de uma imagem do CentOS na máquina virtual. Atente-se que essa imagem de CentOS é a versão 7.7 64-bit e seu tamanho é de aproximadamente 400MB.
 
-### O script rodar, cerca de 40 minutos.
+### O script irá rodar, por cerca de 40 minutos.
 
-**Aproveite que o script está rodando e analise os 4 scripts e o arquivo Vagrant que esta no github clonado.**
+## **Aproveite que o script está rodando e analise os 4 scripts e o arquivo Vagrant que esta no github clonado.**
 
 
 ### Agora que o ascript terminou, iremos iniciar os dois nós workers (compute00 e compute01), com a imagem que foi gerada pelo script via comando do CHROOT. 
 
 Execute: 
 
-vboxmanage import openhpc-demo-client00.ova --options keepallmacs 
+vboxmanage import openhpc-demo-client00.ova --options keepallmacs
+
 vboxmanage import openhpc-demo-client01.ova --options keepallmacs 
 
 
-vboxmanage startvm openhpc-demo-client00 
+vboxmanage startvm openhpc-demo-client00
+
 vboxmanage startvm openhpc-demo-client01
 
 
