@@ -9,6 +9,16 @@ Você deverá **montar** a sua Maquina Host principal, SSD, M2, memorias e Siste
 **Atencao** : o Sistema Operacional acima deve ser instalado na NUC com a senha ClusterCluster e o usuario hpc (tudo padronizado).
 
 
+### IMPORTANTE!
+
+Antes de instalar os softwares e configurar o seu cluster, tenha certeza que seu sistema está atualizado e com headers do sistema operacional devidamente instalados, para isso:
+
+``` bash
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt install linux-headers-$(uname -r) -y 
+```
+
 Instalar os seguintes softwares: 
 
 Virtualbox – a versão utilizada nesse roteiro foi a versão 7.0.12, disponível em https://www.virtualbox.org/wiki/Downloads 
@@ -30,7 +40,13 @@ Clone o github  https://github.com/TiagoDemay/VagrantCluster.git que contém os 
 
 Estando na pasta que você definiu anteriormente, e garantindo que você instalou todos os softwares de pré requisitos, faça os seguintes passos: 
 
-Em um terminal (prompt de comando), digite: vagrant up  
+Em um terminal (prompt de comando), digite:
+
+``` bash
+vagrant up
+``` 
+
+
 
 O comando anterior vai ler os parâmetros que estão no arquivo Vagrantfile, criar a máquina virtual, fazendo download e instalação de uma imagem do CentOS na máquina virtual. Atente-se que essa imagem de CentOS é a versão 7.7 64-bit e seu tamanho é de aproximadamente 400MB.
 
@@ -43,17 +59,23 @@ O comando anterior vai ler os parâmetros que estão no arquivo Vagrantfile, cri
 
 Execute: 
 
+``` bash
 vboxmanage import openhpc-demo-client00.ova --options keepallmacs
 
 vboxmanage import openhpc-demo-client01.ova --options keepallmacs 
+```
 
-
+``` bash
 vboxmanage startvm openhpc-demo-client00
 
 vboxmanage startvm openhpc-demo-client01
+```
 
+Uma vez criada a máquina, você pode entrar nela por meio do comando **vagrant ssh**: 
 
-Uma vez criada a máquina, você pode entrar nela por meio do comando **vagrant ssh** 
+``` bash
+vagrant ssh
+``` 
 
 ### Aqui está uma visão de todos os softwares que instalamos e configuramos automaticamente via vagrant: 
 
